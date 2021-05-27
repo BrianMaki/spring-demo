@@ -32,3 +32,7 @@ PG Admin 4
 Sonarqube
 
 - https://docs.sonarqube.org/latest/setup/get-started-2-minutes/
+
+Run Spring Boot Application
+
+- SpringDemoApplication.java
