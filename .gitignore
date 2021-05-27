@@ -30,4 +30,5 @@ demo.iml
 .factorypath
 .project
 .idea
-target/*
+/target/
+/logs/
