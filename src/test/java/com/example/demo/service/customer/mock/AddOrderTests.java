@@ -1,4 +1,4 @@
-package com.example.demo.service.customer;
+package com.example.demo.service.customer.mock;
 
 import static org.mockito.Mockito.when;
 

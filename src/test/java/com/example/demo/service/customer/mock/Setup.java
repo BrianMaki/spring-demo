@@ -1,4 +1,4 @@
-package com.example.demo.service.customer;
+package com.example.demo.service.customer.mock;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
