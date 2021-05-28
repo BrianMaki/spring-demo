@@ -34,5 +34,4 @@ class Setup {
     	this.customerService = 
     			new CustomerService(this.modelMapper, this.customerRepository, this.customerOrderRepository, this.orderRepository);
     }
-	
 }
