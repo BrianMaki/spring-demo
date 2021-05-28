@@ -33,6 +33,11 @@ Sonarqube
 
 - https://docs.sonarqube.org/latest/setup/get-started-2-minutes/
 
+Lombok
+
+- Intellij => Lombok plugin is already pre-installed unless your version is 2020.3 or less https://projectlombok.org/setup/intellij
+- Eclipse => Lombok plugin will need to be installed https://projectlombok.org/setup/eclipse
+
 Run Spring Boot Application
 
 - SpringDemoApplication.java
