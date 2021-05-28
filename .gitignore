@@ -29,3 +29,5 @@ demo.iml
 .settings
 /target/
 /logs/
+/mvnw
+/mvnw.cmd
