@@ -26,7 +26,6 @@ class Setup {
 	@Mock
 	protected OrderRepository orderRepository;
 	
-	@Mock
 	protected CustomerService customerService;
 	
     @BeforeEach
