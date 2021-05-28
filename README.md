@@ -33,6 +33,8 @@ Sonarqube
 
 - https://docs.sonarqube.org/latest/setup/get-started-2-minutes/
 
+mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=<the-generated-token>
+
 Lombok
 
 - Intellij => Lombok plugin is already pre-installed unless your version is 2020.3 or less https://projectlombok.org/setup/intellij
