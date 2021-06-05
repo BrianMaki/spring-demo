@@ -24,27 +24,27 @@ class AddOrderTests extends Setup {
 		String orderNumber = RandomString.make();
 		UUID customerId = UUID.randomUUID();
 		
-		Customer customer = Customer.builder()
+		var customer = Customer.builder()
 				.customerId(customerId)
-				.firstName("First Name")
-				.lastName("Last Name")
+				.firstName(FIRST_NAME)
+				.lastName(LAST_NAME)
 				.build();
 		
 		when(customerRepository.findById(customerId)).thenReturn(Optional.of(customer));
 		
-		Order existingOrder = Order.builder()
+		var existingOrder = Order.builder()
 				.orderId(UUID.randomUUID())
 				.orderNumber(orderNumber)
 				.build();
 		
 		when(orderRepository.findByOrderNumber(orderNumber)).thenReturn(Optional.of(existingOrder));
 		
-		CustomerOrder customerOrder = CustomerOrder.builder()
+		var customerOrder = CustomerOrder.builder()
 				.customer(customer)
 				.order(existingOrder)
 				.build();
 
-		CreateCustomerOrderRequest request = CreateCustomerOrderRequest.builder()
+		var request = CreateCustomerOrderRequest.builder()
 				.customerId(customer.getCustomerId())
 				.orderNumber(orderNumber)
 				.type(OrderType.WEB)
@@ -64,29 +64,29 @@ class AddOrderTests extends Setup {
 		String orderNumber = RandomString.make();
 		UUID customerId = UUID.randomUUID();
 		
-		Customer customer = Customer.builder()
+		var customer = Customer.builder()
 				.customerId(customerId)
-				.firstName("First Name")
-				.lastName("Last Name")
+				.firstName(FIRST_NAME)
+				.lastName(LAST_NAME)
 				.build();
 		
 		when(customerRepository.findById(customerId)).thenReturn(Optional.of(customer));
 		
 		when(orderRepository.findByOrderNumber(orderNumber)).thenReturn(Optional.empty());
 		
-		Order order = Order.builder()
+		var order = Order.builder()
 				.orderId(UUID.randomUUID())
 				.orderNumber(orderNumber)
 				.build();
 		
-		CustomerOrder customerOrder = CustomerOrder.builder()
+		var customerOrder = CustomerOrder.builder()
 				.customer(customer)
 				.order(order)
 				.build();
 
 		order.getCustomerOrders().add(customerOrder);
 		
-		CreateCustomerOrderRequest request = CreateCustomerOrderRequest.builder()
+		var request = CreateCustomerOrderRequest.builder()
 				.customerId(customer.getCustomerId())
 				.orderNumber(orderNumber)
 				.type(OrderType.WEB)

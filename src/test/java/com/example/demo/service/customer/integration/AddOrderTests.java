@@ -19,12 +19,12 @@ class AddOrderTests extends Setup {
 	void addOrder_GivenOrderDoesNotExist_CreatesNewOrderForCustomer() {
 		
 		// arrange
-		Customer customer = customerRepository.saveAndFlush(Customer.builder()
+		var customer = customerRepository.saveAndFlush(Customer.builder()
 				.firstName("First Name")
 				.lastName("Last Name")
 				.build());
 		
-		CreateCustomerOrderRequest request = CreateCustomerOrderRequest.builder()
+		var request = CreateCustomerOrderRequest.builder()
 				.customerId(customer.getCustomerId())
 				.orderNumber(RandomString.make())
 				.type(OrderType.WEB)
@@ -49,12 +49,12 @@ class AddOrderTests extends Setup {
 		// arrange
 		String orderNumber = RandomString.make();
 		
-		Customer customer = customerRepository.saveAndFlush(Customer.builder()
+		var customer = customerRepository.saveAndFlush(Customer.builder()
 				.firstName("First Name")
 				.lastName("Last Name")
 				.build());
 		
-		CreateCustomerOrderRequest request = CreateCustomerOrderRequest.builder()
+		var request = CreateCustomerOrderRequest.builder()
 				.customerId(customer.getCustomerId())
 				.orderNumber(orderNumber)
 				.type(OrderType.STORE)

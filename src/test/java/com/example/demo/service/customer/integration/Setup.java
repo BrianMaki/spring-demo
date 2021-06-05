@@ -12,6 +12,14 @@ import com.example.demo.service.CustomerService;
 @SpringBootTest(classes = SpringDemoApplication.class)
 @TestPropertySource(locations = "classpath:application-unittest.properties")
 class Setup {
+	
+	protected static final String FIRST_NAME_1 = "First Name 1";
+	protected static final String LAST_NAME_1 = "Last Name 1"; 
+	protected static final String NAME_1 = FIRST_NAME_1 + " " + LAST_NAME_1;
+	
+	protected static final String FIRST_NAME_2 = "First Name 2";
+	protected static final String LAST_NAME_2 = "Last Name 2"; 
+	protected static final String NAME_2 = FIRST_NAME_2 + " " + LAST_NAME_2; 
 
 	@Autowired
 	protected CustomerRepository customerRepository;

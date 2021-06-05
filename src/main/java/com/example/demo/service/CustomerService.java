@@ -46,7 +46,7 @@ public class CustomerService {
 		log.info("Creating Customer for: {}", request.toString());
 		
 		try {
-			return modelMapper.map(customerRepository.save(modelMapper.map(request, Customer.class)), CustomerResponse.class);
+			return modelMapper.map(customerRepository.saveAndFlush(modelMapper.map(request, Customer.class)), CustomerResponse.class);
 			
 		} catch (Exception e) {
 			if (ExceptionUtils.isCause(DataIntegrityViolationException.class, e)) {

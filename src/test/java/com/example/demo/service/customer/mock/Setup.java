@@ -14,6 +14,9 @@ import com.example.demo.service.CustomerService;
 @ExtendWith(MockitoExtension.class)
 class Setup {
 	
+	protected static final String FIRST_NAME = "First Name";
+	protected static final String LAST_NAME = "Last Name";
+	
 	@Mock
 	protected ModelMapper modelMapper;
 	

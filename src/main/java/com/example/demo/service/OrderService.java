@@ -36,7 +36,7 @@ public class OrderService {
 		log.info("Creating Order for: {}", request.toString());
 		
 		try {
-			return modelMapper.map(orderRepository.save(modelMapper.map(request, Order.class)), OrderResponse.class);
+			return modelMapper.map(orderRepository.saveAndFlush(modelMapper.map(request, Order.class)), OrderResponse.class);
 			
 		} catch (Exception e) {
 			if (ExceptionUtils.isCause(DataIntegrityViolationException.class, e)) {
@@ -58,7 +58,7 @@ public class OrderService {
 		modelMapper.map(request, order);
 		
 		try {
-			return modelMapper.map(orderRepository.save(order), OrderResponse.class);
+			return modelMapper.map(orderRepository.saveAndFlush(order), OrderResponse.class);
 			
 		} catch (Exception e) {
 			if (ExceptionUtils.isCause(DataIntegrityViolationException.class, e)) {
