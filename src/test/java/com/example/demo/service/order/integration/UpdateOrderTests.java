@@ -55,8 +55,11 @@ class UpdateOrderTests extends Setup {
 				.orderNumber(ORDER_NUMBER_2)
 				.type(OrderType.STORE)
 				.active(order.isActive())
-				.version(order.getVersion() + 1)
+				.version(order.getVersion())
 				.build();
+		
+		order.setActive(false);
+		orderRepository.saveAndFlush(order);
 		
 		// act and assert
 		Assertions.assertThrows(OptimisticLockException.class, () -> orderService.update(request));

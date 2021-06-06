@@ -54,8 +54,11 @@ class UpdateCustomerTests extends Setup {
 				.firstName(FIRST_NAME_2)
 				.lastName(LAST_NAME_2)
 				.active(customer.isActive())
-				.version(customer.getVersion() + 1)
+				.version(customer.getVersion())
 				.build();
+		
+		customer.setActive(false);
+		customerRepository.saveAndFlush(customer);
 		
 		// act and assert
 		Assertions.assertThrows(OptimisticLockException.class, () -> customerService.update(request));
