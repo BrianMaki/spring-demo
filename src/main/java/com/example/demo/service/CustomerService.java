@@ -41,6 +41,45 @@ public class CustomerService {
 	private final CustomerOrderRepository customerOrderRepository;
 	private final OrderRepository orderRepository;
 	
+	public CustomerOrderResponse addOrder(CreateCustomerOrderRequest request) {
+		
+		Customer customer = customerRepository.findById(request.getCustomerId())
+				.orElseThrow(() -> new EntityNotFoundException("Unable to find Customer to add Order for customer id: " + request.getCustomerId()));
+		
+		Optional<Order> existingOrder = orderRepository.findByOrderNumber(request.getOrderNumber());
+		
+		if (existingOrder.isPresent()) {
+			
+			modelMapper.map(request, existingOrder.get());
+			CustomerOrder customerOrder = CustomerOrder.builder()
+					.customer(customer)
+					.order(existingOrder.get())
+					.build();
+			customerOrderRepository.saveAndFlush(customerOrder);
+
+			return CustomerOrderResponse.builder()
+					.customerOrderId(customerOrder.getCustomerOrderId())
+					.customerResponse(modelMapper.map(customer, CustomerResponse.class))
+					.orderResponse(modelMapper.map(existingOrder.get(), OrderResponse.class))
+					.build();
+			
+		} else {
+			
+			Order order = modelMapper.map(request, Order.class);
+			order.getCustomerOrders().add(CustomerOrder.builder()
+					.customer(customer)
+					.order(order)
+					.build());
+			orderRepository.saveAndFlush(order);
+			
+			return CustomerOrderResponse.builder()
+					.customerOrderId(order.getCustomerOrders().iterator().next().getCustomerOrderId())
+					.customerResponse(modelMapper.map(customer, CustomerResponse.class))
+					.orderResponse(modelMapper.map(order, OrderResponse.class))
+					.build();
+		}
+	}
+	
 	public CustomerResponse create(CreateCustomerRequest request) {
 		
 		log.info("Creating Customer for: {}", request.toString());
@@ -100,44 +139,5 @@ public class CustomerService {
 	
 	public void delete(UUID customerId) {
 		customerRepository.deleteById(customerId);
-	}
-	
-	public CustomerOrderResponse addOrder(CreateCustomerOrderRequest request) {
-		
-		Customer customer = customerRepository.findById(request.getCustomerId())
-				.orElseThrow(() -> new EntityNotFoundException("Unable to find Customer to add Order for customer id: " + request.getCustomerId()));
-		
-		Optional<Order> existingOrder = orderRepository.findByOrderNumber(request.getOrderNumber());
-		
-		if (existingOrder.isPresent()) {
-			
-			modelMapper.map(request, existingOrder.get());
-			CustomerOrder customerOrder = CustomerOrder.builder()
-					.customer(customer)
-					.order(existingOrder.get())
-					.build();
-			customerOrderRepository.saveAndFlush(customerOrder);
-
-			return CustomerOrderResponse.builder()
-					.customerOrderId(customerOrder.getCustomerOrderId())
-					.customerResponse(modelMapper.map(customer, CustomerResponse.class))
-					.orderResponse(modelMapper.map(existingOrder.get(), OrderResponse.class))
-					.build();
-			
-		} else {
-			
-			Order order = modelMapper.map(request, Order.class);
-			order.getCustomerOrders().add(CustomerOrder.builder()
-					.customer(customer)
-					.order(order)
-					.build());
-			orderRepository.saveAndFlush(order);
-			
-			return CustomerOrderResponse.builder()
-					.customerOrderId(order.getCustomerOrders().iterator().next().getCustomerOrderId())
-					.customerResponse(modelMapper.map(customer, CustomerResponse.class))
-					.orderResponse(modelMapper.map(order, OrderResponse.class))
-					.build();
-		}
 	}
 }

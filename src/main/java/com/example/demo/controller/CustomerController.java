@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.CreateCustomerOrderRequest;
 import com.example.demo.dto.CreateCustomerRequest;
+import com.example.demo.dto.CustomerOrderResponse;
 import com.example.demo.dto.CustomerResponse;
 import com.example.demo.dto.UpdateCustomerRequest;
 import com.example.demo.projection.CustomerView;
@@ -47,6 +49,25 @@ public class CustomerController {
 
 	private final CustomerService customerService;
 	
+	@ApiOperation(value = "Create Customer Order") 
+	@PostMapping(path = "/Order", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successfully created new Customer Order"),
+            @ApiResponse(code = 500, message = "Internal server error")
+    })
+	public ResponseEntity<CustomerOrderResponse> addOrder(
+			@Valid @RequestBody @NotNull CreateCustomerOrderRequest request) {
+    	
+		Set<ConstraintViolation<CreateCustomerOrderRequest>> violations = request.readyForSubmissionViolations();
+		if (!violations.isEmpty()) {
+			throw new ConstraintViolationException("Invalid Create Customer Request", violations);
+		}
+		
+	    return ResponseEntity
+	    		.status(201)
+	    		.body(customerService.addOrder(request));
+	}
+	
 	@ApiOperation(value = "Create Customer") 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
@@ -69,9 +90,10 @@ public class CustomerController {
 
 	@ApiOperation(value = "Delete Customer")
 	@DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully Deleted Customer"),
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "Successfully Deleted Customer"),
 			@ApiResponse(code = 500, message = "Internal server error") })
-	public ResponseEntity<Void> delete(@RequestParam @NotNull UUID id) {
+	public ResponseEntity<HttpStatus> delete(@RequestParam @NotNull UUID id) {
 		
 		customerService.delete(id);
 

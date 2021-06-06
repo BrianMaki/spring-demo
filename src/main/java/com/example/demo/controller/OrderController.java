@@ -69,9 +69,10 @@ public class OrderController {
 
 	@ApiOperation(value = "Delete Order")
 	@DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully Deleted Order"),
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "Successfully Deleted Order"),
 			@ApiResponse(code = 500, message = "Internal server error") })
-	public ResponseEntity<Void> delete(@RequestParam @NotNull UUID id) {
+	public ResponseEntity<HttpStatus> delete(@RequestParam @NotNull UUID id) {
 		
 		orderService.delete(id);
 
