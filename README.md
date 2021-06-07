@@ -15,14 +15,13 @@ This Spring Boot Demo Application uses the following:
 - Customer Order Cross Reference Table JPA implementation
 - Basic Controller => Service => Repository implementation with DTOs
 - DTO validation via annotations
+- Keycloak - secured all end points
+- Keycloak - created realm and users
+- Spring Active Profile
 
 Run docker compose file to create Postgres and Sonarqube
 
 - docker-compose up --build -d
-
-Swagger
-
-- http://localhost:9002/spring-demo/swagger-ui/#
 
 PG Admin 4
 
@@ -40,9 +39,41 @@ Lombok
 - Intellij => Lombok plugin is already pre-installed unless your version is 2020.3 or less https://projectlombok.org/setup/intellij
 - Eclipse => Lombok plugin will need to be installed https://projectlombok.org/setup/eclipse
 
+Keycloack:
+
+- http://localhost:8081 - log in with admin/admin
+- Go to spring-demo realm and get credential secret for spring-demo-api
+- Go to application-yaml file and edit keycloak.credentials.secret with secret previously retrieved
+- Get credential secret for spring-demo-developer.  This secret will be used when you get JWT later on when using Postman.
+
+- Realm: spring-demo
+- Client: spring-demo-api, spring-demo-developer, etc.
+
 Run Spring Boot Application
 
 - SpringDemoApplication.java
+
+Use Postman to call Customer and Order endpoints
+
+- In Postman import spring-demo.postman_environment.json located at demo/postman
+- In Postman import spring-demo-api.postman_collection.json
+
+- First use get a JWT Token. Take note of the Token if you choose to use Swagger.  
+  Otherwise, this script will pre-populate JWT environment variable.  
+
+  Note: Token will expire in 5 minutes.
+
+- After getting a JWT Token, you can now call the other end points defined. 
+
+  Note: you may have to edit the parameters before submitting.
+
+Swagger
+
+- http://localhost:9002/spring-demo/swagger-ui/#
+- Instead of using Postman, you can also use Swagger.  However, you have to get a JWT Token
+  via Postman before you can use Swagger.
+- After getting a JWT Token, click on Authorize button to enter JWT Token. Inside Authorize, enter 'Bearer <JWT Token>'.
+- After logging in JWT Token, you can now try the end points via the Swagger GUI.
 
 ### Reference Documentation
 For further reference, please consider the following sections:

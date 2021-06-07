@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
@@ -54,6 +55,7 @@ public class OrderController {
             @ApiResponse(code = 400, message = "Update to update Order, Unique Constraint Exception"),
             @ApiResponse(code = 500, message = "Internal server error")
     })
+	@RolesAllowed("spring-demo-api-admin")
 	public ResponseEntity<OrderResponse> create(
 			@Valid @RequestBody @NotNull CreateOrderRequest request) {
 		
@@ -72,9 +74,10 @@ public class OrderController {
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = "Successfully Deleted Order"),
 			@ApiResponse(code = 500, message = "Internal server error") })
-	public ResponseEntity<HttpStatus> delete(@RequestParam @NotNull UUID id) {
+	@RolesAllowed("spring-demo-api-admin")
+	public ResponseEntity<HttpStatus> delete(@RequestParam @NotNull UUID orderId) {
 		
-		orderService.delete(id);
+		orderService.delete(orderId);
 
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -88,6 +91,7 @@ public class OrderController {
             @ApiResponse(code = 500, message = "Internal server error"),
             @ApiResponse(code = 404, message = "Not found any order with the given Id")
     })
+    @RolesAllowed("spring-demo-api-client")
 	public ResponseEntity<OrderView> get(@PathVariable UUID id) {
     	 return ResponseEntity
     			 .status(HttpStatus.OK)
@@ -100,6 +104,7 @@ public class OrderController {
             @ApiResponse(code = 200, message = "Successfully found Orders"),
             @ApiResponse(code = 500, message = "Internal server error")
     })
+    @RolesAllowed("spring-demo-api-client")
     public ResponseEntity<List<OrderResponse>> get() {
 
         return ResponseEntity
@@ -116,6 +121,7 @@ public class OrderController {
             @ApiResponse(code = 404, message = "Not found any Order to update with the given Order Id"),
             @ApiResponse(code = 500, message = "Internal server error")
     })
+    @RolesAllowed("spring-demo-api-admin")
     public ResponseEntity<OrderResponse> update(
             @Valid @RequestBody UpdateOrderRequest request) {
         Set<ConstraintViolation<UpdateOrderRequest>> violations = request.readyForSubmissionViolations();

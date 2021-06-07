@@ -1,0 +1,33 @@
+server:
+  servlet:
+    context-path: /spring-demo
+  port: 9002
+        
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_schema=demo
+      jdbc:
+        time_zone=UTC
+    show-sql: true  
+  h2:
+    console:
+      enabled: true
+      path: /h2  
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;init=create schema if not exists demo
+    username: sa
+    password: sa
+    driverClassName: org.h2.Driver
+  flyway:
+    enabled: false
+  autoconfigure:
+    exclude: org.keycloak.adapters.springboot.KeycloakSpringBootConfiguration  
+keycloak:
+  enabled: false

@@ -1,0 +1,47 @@
+{"properties": [
+  {
+    "name": "app.version",
+    "type": "java.lang.String",
+    "description": "A description for 'app.version'"
+  },
+  {
+    "name": "app.name",
+    "type": "java.lang.String",
+    "description": "A description for 'app.name'"
+  },
+  {
+    "name": "app.title",
+    "type": "java.lang.String",
+    "description": "A description for 'app.title'"
+  },
+  {
+    "name": "app.descripiton",
+    "type": "java.lang.String",
+    "description": "A description for 'app.descripiton'"
+  },
+  {
+    "name": "app.terms",
+    "type": "java.lang.String",
+    "description": "A description for 'app.terms'"
+  },
+  {
+    "name": "app.contact.name",
+    "type": "java.lang.String",
+    "description": "A description for 'app.contact.name'"
+  },
+  {
+    "name": "app.contact.email",
+    "type": "java.lang.String",
+    "description": "A description for 'app.contact.email'"
+  },
+  {
+    "name": "app.license.name",
+    "type": "java.lang.String",
+    "description": "A description for 'app.license.name'"
+  },
+  {
+    "name": "app.license.url",
+    "type": "java.lang.String",
+    "description": "A description for 'app.license.url'"
+  }
+]}

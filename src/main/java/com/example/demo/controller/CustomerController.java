@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
@@ -55,6 +56,7 @@ public class CustomerController {
             @ApiResponse(code = 201, message = "Successfully created new Customer Order"),
             @ApiResponse(code = 500, message = "Internal server error")
     })
+	@RolesAllowed("spring-demo-api-admin")
 	public ResponseEntity<CustomerOrderResponse> addOrder(
 			@Valid @RequestBody @NotNull CreateCustomerOrderRequest request) {
     	
@@ -75,6 +77,7 @@ public class CustomerController {
             @ApiResponse(code = 400, message = "Update to create Customer, Unique Constraint Exception"),
             @ApiResponse(code = 500, message = "Internal server error")
     })
+	@RolesAllowed("spring-demo-api-admin")
 	public ResponseEntity<CustomerResponse> create(
 			@Valid @RequestBody @NotNull CreateCustomerRequest request) {
     	
@@ -93,9 +96,10 @@ public class CustomerController {
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = "Successfully Deleted Customer"),
 			@ApiResponse(code = 500, message = "Internal server error") })
-	public ResponseEntity<HttpStatus> delete(@RequestParam @NotNull UUID id) {
+	@RolesAllowed("spring-demo-api-admin")
+	public ResponseEntity<HttpStatus> delete(@RequestParam @NotNull UUID customerId) {
 		
-		customerService.delete(id);
+		customerService.delete(customerId);
 
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -109,6 +113,7 @@ public class CustomerController {
             @ApiResponse(code = 500, message = "Internal server error"),
             @ApiResponse(code = 404, message = "Not found any customer with the given Id")
     })
+    @RolesAllowed("spring-demo-api-client")
 	public ResponseEntity<CustomerView> get(@PathVariable UUID id) {
     	 return ResponseEntity
     			 .status(HttpStatus.OK)
@@ -121,6 +126,7 @@ public class CustomerController {
             @ApiResponse(code = 200, message = "Successfully found Customers"),
             @ApiResponse(code = 500, message = "Internal server error")
     })
+    @RolesAllowed("spring-demo-api-client")
     public ResponseEntity<List<CustomerResponse>> get() {
 
         return ResponseEntity
@@ -137,6 +143,7 @@ public class CustomerController {
             @ApiResponse(code = 404, message = "Not found any Customer to update with the given Customer Id"),
             @ApiResponse(code = 500, message = "Internal server error")
     })
+    @RolesAllowed("spring-demo-api-admin")
     public ResponseEntity<CustomerResponse> update(
             @Valid @RequestBody UpdateCustomerRequest request) {
         Set<ConstraintViolation<UpdateCustomerRequest>> violations = request.readyForSubmissionViolations();

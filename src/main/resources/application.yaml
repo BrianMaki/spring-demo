@@ -6,6 +6,8 @@ server:
 spring:
   application:
     name: demo
+  profiles:
+    active: dev
   jpa:
     open-in-view: true
     hibernate:
@@ -33,4 +35,32 @@ spring:
     url: jdbc:postgresql://${DB_HOST:localhost:5432/demo}
     username: ${DB_USER:postgres}
     password: ${DB_PASS:password}
-   
+  
+keycloak:
+  auth-server-url: ${KEYCLOAK_AUTH_SERVER_URL:http://localhost:8081/auth}
+  realm: ${KEYCLOAK_REALM:spring-demo}
+  resource: ${KEYCLOAK_RESOURCE:spring-demo-api}
+  credentials:
+    secret: ${KEYCLOAK_CREDENTIALS_SECRET:8e66d4c6-e855-4261-ae63-b7fed91370f2}
+  use-resource-role-mappings: true
+  bearer-only: true
+  ssl-required: ${KEYCLOAK_SSL_REQUIRED:external}
+
+management:
+  endpoint:
+    health:
+      show-details: always
+    
+app:
+  title: REST API title
+  name: REST API name
+  descripiton: REST API description
+  version: REST API version
+  terms: REST API Terms of Service
+  contact:
+    name:  REST API contact name
+    email: REST API contact email
+  license:
+    name: REST API license name
+    url: REST API license url
+  

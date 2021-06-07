@@ -48,6 +48,7 @@ class GetCustomerTests extends Setup {
 		
 		// act
 		List<CustomerResponse> list = customerService.get();
+		System.out.println("Size: " + list.size());
 		
 		// assert
 		Assertions.assertEquals(expectedSize, list.size());
