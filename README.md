@@ -15,7 +15,7 @@ This Spring Boot Demo Application uses the following:
 - Customer Order Cross Reference Table JPA implementation
 - Basic Controller => Service => Repository implementation with DTOs
 - DTO validation via annotations
-- Keycloak - secured all end points
+- Keycloak - secured all end points except 'get customers' and 'get orders'
 - Keycloak - created realm and users
 - Spring Active Profile
 
@@ -43,7 +43,8 @@ Keycloack:
 
 - http://localhost:8081 - log in with admin/admin
 - Go to spring-demo realm and get credential secret for spring-demo-api
-- Go to application-yaml file and edit keycloak.credentials.secret with secret previously retrieved
+- Right click SpringDemoApplication.java and go Run Configuration. Create environment variable KEYCLOAK_CREDENTIALS_SECRET
+  with credential secret for spring-demo-api.
 - Get credential secret for spring-demo-developer.  This secret will be used when you get JWT later on when using Postman.
 
 - Realm: spring-demo
@@ -52,7 +53,7 @@ Keycloack:
 Run Spring Boot Application
 
 - Create Environment Variable 'SPRING_PROFILES_ACTIVE'.  Value 'dev' will point to application-dev.yaml file. 
-  Do not use 'test'. This profile is used solely for unit tests and should not be used on start up.  If you enter a
+  Do not use 'unit-test'. This profile is used solely for unit tests and should not be used on start up.  If you enter a
   value that does not correspond to en existing yaml file, then application.yaml will be used.  For example, 'prod'
   will default to application.yaml file.
 

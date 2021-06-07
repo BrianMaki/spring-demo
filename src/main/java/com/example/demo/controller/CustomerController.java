@@ -126,7 +126,6 @@ public class CustomerController {
             @ApiResponse(code = 200, message = "Successfully found Customers"),
             @ApiResponse(code = 500, message = "Internal server error")
     })
-    @RolesAllowed("spring-demo-api-client")
     public ResponseEntity<List<CustomerResponse>> get() {
 
         return ResponseEntity

@@ -146,34 +146,6 @@
 			"response": []
 		},
 		{
-			"name": "Get Customers",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{jwt}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/spring-demo/Customer",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"spring-demo",
-						"Customer"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Create Customer Order",
 			"event": [
 				{
@@ -277,6 +249,27 @@
 							"key": "customerId",
 							"value": "{{customerId}}"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customers",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/spring-demo/Customer",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"spring-demo",
+						"Customer"
 					]
 				}
 			},
@@ -500,14 +493,7 @@
 			},
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{jwt}}",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],

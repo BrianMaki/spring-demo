@@ -10,7 +10,7 @@ import com.example.demo.repository.CustomerRepository;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.service.CustomerService;
 
-@ActiveProfiles("test")
+@ActiveProfiles("unit-test")
 @ConditionalOnProperty(value = "keycloak.enabled", matchIfMissing = true)
 @SpringBootTest(classes = SpringDemoApplication.class)
 class Setup {
