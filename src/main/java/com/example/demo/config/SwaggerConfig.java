@@ -40,8 +40,8 @@ public class SwaggerConfig {
 	@Value("${app.version: REST API version}")
     private String version;
 
-    @Value("${app.terms: REST API Terms of Service}")
-    private String termsOfService;
+    @Value("${app.terms.service.url: REST API Terms of Service}")
+    private String termsOfServiceUrl;
     
     @Value("${app.contact.name: REST API contact name}")
     private String contactName;
@@ -64,7 +64,7 @@ public class SwaggerConfig {
     		  title,
     		  description,
     		  version,
-    		  termsOfService,
+    		  termsOfServiceUrl,
     		  new Contact(contactName, contactUrl, contactEmail),
     		  licenseName,
     		  licenseUrl,

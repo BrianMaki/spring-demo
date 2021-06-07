@@ -50,18 +50,18 @@ management:
       show-details: always
     
 app:
-  title: REST API title
-  name: REST API name
-  description: REST API description
-  version: REST API version
+  title: REST API DEV title
+  name: REST API DEV name
+  description: REST API DEV description
+  version: REST API DEV version
   terms:
     service:
-      url: REST API terms of service url
+      url: REST API DEV terms of service url
   contact:
-    name: REST API contact name
-    email: REST API contact email
-    url: REST API contact url
+    name: REST API DEV contact name
+    email: REST API DEV contact email
+    url: REST API DEV contact url
   license:
-    name: REST API license name
-    url: REST API license url
+    name: REST API DEV license name
+    url: REST API DEV license url
   

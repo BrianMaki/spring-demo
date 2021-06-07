@@ -15,14 +15,14 @@
     "description": "A description for 'app.title'"
   },
   {
-    "name": "app.descripiton",
+    "name": "app.description",
     "type": "java.lang.String",
     "description": "A description for 'app.descripiton'"
   },
   {
-    "name": "app.terms",
+    "name": "app.terms.service.url",
     "type": "java.lang.String",
-    "description": "A description for 'app.terms'"
+    "description": "A description for 'app.terms.service.url'"
   },
   {
     "name": "app.contact.name",
@@ -43,5 +43,10 @@
     "name": "app.license.url",
     "type": "java.lang.String",
     "description": "A description for 'app.license.url'"
+  },
+  {
+    "name": "app.contact.url",
+    "type": "java.lang.String",
+    "description": "A description for 'app.contact.url'"
   }
 ]}

@@ -51,6 +51,11 @@ Keycloack:
 
 Run Spring Boot Application
 
+- Create Environment Variable 'SPRING_PROFILES_ACTIVE'.  Value 'dev' will point to application-dev.yaml file. 
+  Do not use 'test'. This profile is used solely for unit tests and should not be used on start up.  If you enter a
+  value that does not correspond to en existing yaml file, then application.yaml will be used.  For example, 'prod'
+  will default to application.yaml file.
+
 - SpringDemoApplication.java
 
 Use Postman to call Customer and Order endpoints
