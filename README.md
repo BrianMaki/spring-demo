@@ -61,6 +61,8 @@ Run Spring Boot Application
 
 Use Postman to call Customer and Order endpoints
 
+- https://www.postman.com/downloads/
+
 - In Postman import spring-demo.postman_environment.json located at demo/postman
 - In Postman import spring-demo-api.postman_collection.json
 
