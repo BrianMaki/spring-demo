@@ -1,7 +1,7 @@
 #!/bin/bash
 
 KEYCLOAK_REALM_URL="$KEYCLOAK_URL/auth/admin/realms/spring-demo"
-USERNAME="bobross"
+USERNAME="dansmith"
 ADMIN_GROUP="spring-demo-admins"
 
 # Get admin user token
@@ -27,11 +27,11 @@ CREATE_USER_STATUS=$(curl -s -o /dev/null -w '%{http_code}' \
     --header "Authorization: Bearer $ADMIN_TOKEN" \
     --header 'Content-Type: application/json' \
     --data-raw '{
-                    "firstName": "bob",
-                    "lastName": "ross",
-                    "email": "bobross@paintit.com",
+                    "firstName": "dan",
+                    "lastName": "smith",
+                    "email": "dansmith@example.com",
                     "enabled": "true",
-                    "username": "bobross",
+                    "username": "dansmith",
                     "attributes": {
                         "universal-id": ["77da92db-0791-491e-8c58-1a969e67d2fa"]
                     },
@@ -58,7 +58,7 @@ USER_ID=$(curl -s --location --request GET "$KEYCLOAK_REALM_URL/users?username=$
 --header "Authorization: Bearer $ADMIN_TOKEN" | jq -r '.[0].id') 
 
 if [ -z "$USER_ID" ]; then
-    echo "user bob ross does not exists"
+    echo "user dan smith does not exists"
     exit 3
 fi
 
