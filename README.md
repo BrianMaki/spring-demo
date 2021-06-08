@@ -81,7 +81,7 @@ Swagger
 - Instead of using Postman, you can also use Swagger.  However, you have to get a JWT Token
   via Postman before you can use Swagger.
 - After getting a JWT Token, click on Authorize button to enter JWT Token. 
-  Inside Authorize, enter "Bearer <JWT Token>".
+  Inside Authorize, enter "Bearer JWT_VALUE".
 - After logging in JWT Token, you can now try the end points via the Swagger GUI.
 
 ### Reference Documentation
