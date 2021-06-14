@@ -32,7 +32,7 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({Exception.class})
     public ResponseEntity<Object> handleInternal(Exception ex, WebRequest request) {
         log.error("Internal server error occurred", ex);
-        ApiError apiError = ApiError.builder()
+        var apiError = ApiError.builder()
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
                 .build();
@@ -48,7 +48,7 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
                         .message(constraintViolation.getMessage())
                         .code(constraintViolation.getConstraintDescriptor().getAnnotation().annotationType().getSimpleName())
                         .build()).collect(Collectors.toList()):null;
-        ApiError apiError = ApiError.builder()
+        var apiError = ApiError.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
                 .message(ex.getMessage())
                 .validationErrors(validationErrors)
@@ -61,7 +61,7 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
  
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Object> handleEnityNotFoundException(EntityNotFoundException ex) {
-        ApiError apiError = ApiError.builder()
+        var apiError = ApiError.builder()
                 .status(HttpStatus.NOT_FOUND.value())
                 .message(ex.getMessage())
                 .build();
@@ -73,7 +73,7 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
     
     @ExceptionHandler(OptimisticLockException.class)
     public ResponseEntity<Object> handleOptimisticLockException(OptimisticLockException ex) {
-        ApiError apiError = ApiError.builder()
+        var apiError = ApiError.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
                 .message(ex.getMessage())
                 .build();
@@ -85,7 +85,7 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
     
     @ExceptionHandler(UniqueConstraintException.class)
     public ResponseEntity<Object> handleUniqueConstraintException(UniqueConstraintException ex) {
-        ApiError apiError = ApiError.builder()
+        var apiError = ApiError.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
                 .message(ex.getMessage())
                 .build();
@@ -99,7 +99,7 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
     @NonNull
     protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex, @NonNull HttpHeaders headers, HttpStatus status, @NonNull WebRequest request) {
 
-        ApiError apiError = ApiError.builder()
+        var apiError = ApiError.builder()
                 .status(status.value())
                 .message(ex.getMessage())
                 .build();
@@ -124,7 +124,7 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
                     validationErrors.add(builder.build());
                 });
 
-        ApiError apiError = ApiError.builder()
+        var apiError = ApiError.builder()
                 .status(status.value())
                 .message(status.getReasonPhrase())
                 .validationErrors(validationErrors)
@@ -140,10 +140,10 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
     	if (ex instanceof MethodArgumentTypeMismatchException) {
     		
     		String parameterName = ((MethodArgumentTypeMismatchException) ex).getName();
-    		String message = String.format("Method parameter: '%s' contains an invalid value: '%s'", parameterName, ex.getValue());
+    		var message = String.format("Method parameter: '%s' contains an invalid value: '%s'", parameterName, ex.getValue());
     		log.error(message, ex);
     		
-	        ApiError apiError = ApiError.builder()
+	        var apiError = ApiError.builder()
 	                .status(HttpStatus.BAD_REQUEST.value())
 	                .message(message)
 	                .build();

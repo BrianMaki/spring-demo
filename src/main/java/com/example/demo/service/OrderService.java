@@ -48,7 +48,7 @@ public class OrderService {
 	
 	public OrderResponse update(UpdateOrderRequest request) {
 		
-		Order order = orderRepository.findById(request.getOrderId())
+		var order = orderRepository.findById(request.getOrderId())
 				.orElseThrow(() -> new EntityNotFoundException("Unable to update Order because could not find Order with order id: " + request.getOrderId()));
 		
 		if (order.getVersion() != request.getVersion()) {

@@ -10,6 +10,7 @@ This Spring Boot Demo Application uses the following:
 - Lombok library
 - Spring Projection
 - Sonarqube for code analysis
+- Jacoco code coverage
 - Swagger
 - Optimistic Locking example
 - Customer Order Cross Reference Table JPA implementation

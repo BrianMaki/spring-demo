@@ -94,7 +94,7 @@ public class SwaggerConfig {
     }
 
     List<SecurityReference> defaultAuth() {
-      AuthorizationScope authorizationScope
+      var authorizationScope
           = new AuthorizationScope(GLOBAL, ACCESS_EVERYTHING);
       AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
       authorizationScopes[0] = authorizationScope;

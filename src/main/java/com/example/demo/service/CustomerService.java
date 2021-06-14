@@ -43,7 +43,7 @@ public class CustomerService {
 	
 	public CustomerOrderResponse addOrder(CreateCustomerOrderRequest request) {
 		
-		Customer customer = customerRepository.findById(request.getCustomerId())
+		var customer = customerRepository.findById(request.getCustomerId())
 				.orElseThrow(() -> new EntityNotFoundException("Unable to find Customer to add Order for customer id: " + request.getCustomerId()));
 		
 		Optional<Order> existingOrder = orderRepository.findByOrderNumber(request.getOrderNumber());
@@ -51,7 +51,7 @@ public class CustomerService {
 		if (existingOrder.isPresent()) {
 			
 			modelMapper.map(request, existingOrder.get());
-			CustomerOrder customerOrder = CustomerOrder.builder()
+			var customerOrder = CustomerOrder.builder()
 					.customer(customer)
 					.order(existingOrder.get())
 					.build();
@@ -65,7 +65,7 @@ public class CustomerService {
 			
 		} else {
 			
-			Order order = modelMapper.map(request, Order.class);
+			var order = modelMapper.map(request, Order.class);
 			order.getCustomerOrders().add(CustomerOrder.builder()
 					.customer(customer)
 					.order(order)
@@ -97,7 +97,7 @@ public class CustomerService {
 	
 	public CustomerResponse update(UpdateCustomerRequest request) {
 		
-		Customer customer = customerRepository.findById(request.getCustomerId())
+		var customer = customerRepository.findById(request.getCustomerId())
 				.orElseThrow(() -> new EntityNotFoundException("Unable to update Customer because record could not find Customer with customer id: " + request.getCustomerId()));
 		
 		if (customer.getVersion() != request.getVersion()) {
