@@ -39,7 +39,6 @@ class Setup {
     void setUp() throws Exception {
     	
     	mockMvc = MockMvcBuilders.webAppContextSetup(context)
-    			//.alwaysDo(print())
     		    //.apply(springSecurity())
     			.build(); 
         

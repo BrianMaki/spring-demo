@@ -24,7 +24,6 @@ class GetCustomerTests extends Setup {
 
 	@Test
 	@Transactional
-	@WithMockUser
 	void getCustomer_ReturnsCustomerResponseList() throws Exception {
 
 		// arrange
