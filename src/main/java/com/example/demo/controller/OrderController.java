@@ -84,7 +84,7 @@ public class OrderController {
 				.build();
 	}
 	
-    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Read Order", response = OrderResponse.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully found the order with the given Id"),
@@ -92,10 +92,10 @@ public class OrderController {
             @ApiResponse(code = 404, message = "Not found any order with the given Id")
     })
     @RolesAllowed("spring-demo-api-client")
-	public ResponseEntity<OrderView> get(@PathVariable UUID id) {
+	public ResponseEntity<OrderView> get(@PathVariable UUID orderId) {
     	 return ResponseEntity
     			 .status(HttpStatus.OK)
-    			 .body(orderService.get(id));
+    			 .body(orderService.get(orderId));
 	}
     
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

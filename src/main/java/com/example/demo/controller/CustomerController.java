@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,13 +52,13 @@ public class CustomerController {
 
 	private final CustomerService customerService;
 	
+	@RolesAllowed("spring-demo-api-admin")
 	@ApiOperation(value = "Create Customer Order") 
 	@PostMapping(path = "/Order", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successfully created new Customer Order"),
             @ApiResponse(code = 500, message = "Internal server error")
     })
-	@RolesAllowed("spring-demo-api-admin")
 	public ResponseEntity<CustomerOrderResponse> addOrder(
 			@Valid @RequestBody @NotNull CreateCustomerOrderRequest request) {
     	
@@ -70,6 +72,7 @@ public class CustomerController {
 	    		.body(customerService.addOrder(request));
 	}
 	
+	@RolesAllowed("spring-demo-api-admin")
 	@ApiOperation(value = "Create Customer") 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
@@ -77,7 +80,6 @@ public class CustomerController {
             @ApiResponse(code = 400, message = "Update to create Customer, Unique Constraint Exception"),
             @ApiResponse(code = 500, message = "Internal server error")
     })
-	@RolesAllowed("spring-demo-api-admin")
 	public ResponseEntity<CustomerResponse> create(
 			@Valid @RequestBody @NotNull CreateCustomerRequest request) {
     	
@@ -91,12 +93,12 @@ public class CustomerController {
 	    		.body(customerService.create(request));
 	}
 
+	@RolesAllowed("spring-demo-api-admin")
 	@ApiOperation(value = "Delete Customer")
 	@DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = "Successfully Deleted Customer"),
 			@ApiResponse(code = 500, message = "Internal server error") })
-	@RolesAllowed("spring-demo-api-admin")
 	public ResponseEntity<HttpStatus> delete(@RequestParam @NotNull UUID customerId) {
 		
 		customerService.delete(customerId);
@@ -106,18 +108,23 @@ public class CustomerController {
 				.build();
 	}
 	
-    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RolesAllowed("spring-demo-api-client")
+    @GetMapping(path = "/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Read Customer", response = CustomerView.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully found the customerwith the given Id"),
             @ApiResponse(code = 500, message = "Internal server error"),
             @ApiResponse(code = 404, message = "Not found any customer with the given Id")
     })
-    @RolesAllowed("spring-demo-api-client")
-	public ResponseEntity<CustomerView> get(@PathVariable UUID id) {
-    	 return ResponseEntity
-    			 .status(HttpStatus.OK)
-    			 .body(customerService.get(id));
+	public ResponseEntity<CustomerView> get(@PathVariable UUID customerId) {
+		
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(auth.getAuthorities());
+		
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(customerService.get(customerId));
 	}
     
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -127,12 +134,12 @@ public class CustomerController {
             @ApiResponse(code = 500, message = "Internal server error")
     })
     public ResponseEntity<List<CustomerResponse>> get() {
-
         return ResponseEntity
         		.status(HttpStatus.OK)
         		.body(customerService.get());
     }
     
+    @RolesAllowed("spring-demo-api-admin")
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Update Customer")
     @ApiResponses(value = {
@@ -142,7 +149,6 @@ public class CustomerController {
             @ApiResponse(code = 404, message = "Not found any Customer to update with the given Customer Id"),
             @ApiResponse(code = 500, message = "Internal server error")
     })
-    @RolesAllowed("spring-demo-api-admin")
     public ResponseEntity<CustomerResponse> update(
             @Valid @RequestBody UpdateCustomerRequest request) {
         Set<ConstraintViolation<UpdateCustomerRequest>> violations = request.readyForSubmissionViolations();
