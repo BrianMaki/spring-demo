@@ -20,8 +20,8 @@ class AddOrderTests extends Setup {
 		
 		// arrange
 		var customer = customerRepository.saveAndFlush(Customer.builder()
-				.firstName("First Name")
-				.lastName("Last Name")
+				.firstName(FIRST_NAME_1)
+				.lastName(LAST_NAME_1)
 				.build());
 		
 		var request = CreateCustomerOrderRequest.builder()
@@ -50,8 +50,8 @@ class AddOrderTests extends Setup {
 		String orderNumber = RandomString.make();
 		
 		var customer = customerRepository.saveAndFlush(Customer.builder()
-				.firstName("First Name")
-				.lastName("Last Name")
+				.firstName(FIRST_NAME_1)
+				.lastName(LAST_NAME_1)
 				.build());
 		
 		var request = CreateCustomerOrderRequest.builder()
