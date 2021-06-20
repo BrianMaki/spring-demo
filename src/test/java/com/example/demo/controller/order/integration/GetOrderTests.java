@@ -1,4 +1,4 @@
-package com.example.demo.controller.customer.integration;
+package com.example.demo.controller.order.integration;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -13,28 +13,29 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 
-import com.example.demo.domain.model.Customer;
+import com.example.demo.domain.enums.OrderType;
+import com.example.demo.domain.model.Order;
 
-class GetCustomerTests extends Setup {
+class GetOrderTests extends Setup {
 
 	@Test
 	@Transactional
-	void getCustomer_ReturnsCustomerResponseList() throws Exception {
+	void getOrder_ReturnsCustomerResponseList() throws Exception {
 
 		// arrange
-		customerRepository.saveAndFlush(Customer.builder()
-				.firstName(FIRST_NAME_1)
-				.lastName(LAST_NAME_1)
+		orderRepository.saveAndFlush(Order.builder()
+				.orderNumber(ORDER_NUMBER_1)
+				.type(OrderType.WEB)
 				.build());
 		
-		customerRepository.saveAndFlush(Customer.builder()
-				.firstName(FIRST_NAME_2)
-				.lastName(LAST_NAME_2)
+		orderRepository.saveAndFlush(Order.builder()
+				.orderNumber(ORDER_NUMBER_2)
+				.type(OrderType.STORE)
 				.build());
 
 		// act and assert
 		mockMvc.perform(
-				get("/Customer"))
+				get("/Order"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$", hasSize(2)))
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
@@ -43,39 +44,39 @@ class GetCustomerTests extends Setup {
 	@Test
 	@Transactional
 	@WithMockUser(roles = "spring-demo-api-client")
-	void getCustomerByCustomerId_GivenValidRole_ReturnsCustomerResponse() throws Exception {
+	void getOrderByOrderId_GivenValidRole_ReturnsOrderResponse() throws Exception {
 
 		// arrange
-		Customer customer = customerRepository.saveAndFlush(Customer.builder()
-				.firstName(FIRST_NAME_1)
-				.lastName(LAST_NAME_1)
+		var order = orderRepository.saveAndFlush(Order.builder()
+				.orderNumber(ORDER_NUMBER_1)
+				.type(OrderType.STORE)
 				.build());
 
 		// act and assert
 		mockMvc.perform(
-				get("/Customer/{customerId}", customer.getCustomerId().toString()))
+				get("/Order/{orderId}", order.getOrderId().toString()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.customerId", is(customer.getCustomerId().toString())))
-				.andExpect(jsonPath("$.firstName", is(customer.getFirstName())))
-				.andExpect(jsonPath("$.lastName", is(customer.getLastName())))
+				.andExpect(jsonPath("$.orderId", is(order.getOrderId().toString())))
+				.andExpect(jsonPath("$.orderNumber", is(order.getOrderNumber())))
+				.andExpect(jsonPath("$.type", is(order.getType().toString())))
 				.andExpect(jsonPath("$.active", is(true)));
 	}
 	
 	@Test
 	@Transactional
 	@WithMockUser(roles = "invalid-spring-demo-api-client")
-	void getCustomerByCustomerId_GivenInvalidRole_ReturnsInternalServerError() throws Exception {
+	void getOrderByOrderId_GivenInvalidRole_ReturnsInternalServerError() throws Exception {
 
 		// arrange
-		Customer customer = customerRepository.saveAndFlush(Customer.builder()
-				.firstName(FIRST_NAME_1)
-				.lastName(LAST_NAME_1)
+		var order = orderRepository.saveAndFlush(Order.builder()
+				.orderNumber(ORDER_NUMBER_1)
+				.type(OrderType.STORE)
 				.build());
 
 		// act and assert
 		mockMvc.perform(
-				get("/Customer/{customerId}", customer.getCustomerId().toString()))
+				get("/Order/{orderId}", order.getOrderId().toString()))
 				.andExpect(status().isInternalServerError());
 	}
 }

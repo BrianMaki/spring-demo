@@ -73,7 +73,7 @@ class GetCustomerTests extends Setup {
 	
 	@Test
 	@Transactional
-	void getCustomerById_GivenInValidId_ThrowsEntityNotFoundException() {
+	void getCustomerById_GivenInvalidId_ThrowsEntityNotFoundException() {
 		
 		// arrange
 		UUID customerId = UUID.randomUUID();

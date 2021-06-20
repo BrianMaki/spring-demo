@@ -33,7 +33,7 @@ class CreateCustomerTests extends Setup {
 	
 	@Test
 	@Transactional
-	void createCustomer_GivenInValidRequest_ThrowUniqueConstraintException() {
+	void createCustomer_GivenInvalidRequest_ThrowUniqueConstraintException() {
 		
 		// arrange
 		customerRepository.saveAndFlush(Customer.builder()

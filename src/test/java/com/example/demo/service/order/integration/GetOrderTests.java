@@ -74,7 +74,7 @@ class GetOrderTests extends Setup {
 	
 	@Test
 	@Transactional
-	void getOrderById_GivenInValidId_ThrowsEntityNotFoundException() {
+	void getOrderById_GivenInvalidId_ThrowsEntityNotFoundException() {
 		
 		// arrange
 		UUID orderId = UUID.randomUUID();

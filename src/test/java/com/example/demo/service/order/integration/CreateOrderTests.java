@@ -33,7 +33,7 @@ class CreateOrderTests extends Setup {
 	
 	@Test
 	@Transactional
-	void createOrder_GivenInValidRequest_ThrowUniqueConstraintException() {
+	void createOrder_GivenInvalidRequest_ThrowUniqueConstraintException() {
 		
 		// arrange
 		orderRepository.saveAndFlush(Order.builder()

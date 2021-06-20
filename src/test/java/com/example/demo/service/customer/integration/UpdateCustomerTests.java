@@ -41,7 +41,7 @@ class UpdateCustomerTests extends Setup {
 	
 	@Test
 	@Transactional
-	void updateCustomer_GivenInValidRequest_ThrowsOptimisticLockException() {
+	void updateCustomer_GivenInvalidRequest_ThrowsOptimisticLockException() {
 		
 		// arrange
 		var customer = customerRepository.saveAndFlush(Customer.builder()
@@ -66,7 +66,7 @@ class UpdateCustomerTests extends Setup {
 	
 	@Test
 	@Transactional
-	void updateCustomer_GivenInValidRequest_ThrowsUniqueConstraintException() {
+	void updateCustomer_GivenInvalidRequest_ThrowsUniqueConstraintException() {
 		
 		// arrange
 		customerRepository.saveAndFlush(Customer.builder()

@@ -42,7 +42,7 @@ class UpdateOrderTests extends Setup {
 	
 	@Test
 	@Transactional
-	void updateOrder_GivenInValidRequest_ThrowsOptimisticLockException() {
+	void updateOrder_GivenInvalidRequest_ThrowsOptimisticLockException() {
 		
 		// arrange
 		var order = orderRepository.saveAndFlush(Order.builder()
@@ -67,7 +67,7 @@ class UpdateOrderTests extends Setup {
 	
 	@Test
 	@Transactional
-	void updateOrder_GivenInValidRequest_ThrowsUniqueConstraintException() {
+	void updateOrder_GivenInvalidRequest_ThrowsUniqueConstraintException() {
 		
 		// arrange
 		orderRepository.saveAndFlush(Order.builder()

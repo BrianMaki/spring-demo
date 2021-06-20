@@ -16,7 +16,7 @@ class AddOrderTests extends Setup {
 
 	@Test
 	@Transactional
-	void addOrder_GivenOrderDoesNotExist_CreatesNewOrderForCustomer() {
+	void addOrder_GivenOrderDoesNotExist_ReturnsCustomerOrderResponse() {
 		
 		// arrange
 		var customer = customerRepository.saveAndFlush(Customer.builder()
@@ -44,7 +44,7 @@ class AddOrderTests extends Setup {
 	
 	@Test
 	@Transactional
-	void addOrder_GivenOrderExists_AssignsExistingOrderForCustomer() {
+	void addOrder_GivenOrderExists_ReturnsCustomerOrderResponse() {
 		
 		// arrange
 		String orderNumber = RandomString.make();
