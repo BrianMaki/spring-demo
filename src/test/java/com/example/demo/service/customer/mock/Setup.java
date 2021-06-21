@@ -13,28 +13,28 @@ import com.example.demo.service.CustomerService;
 
 @ExtendWith(MockitoExtension.class)
 class Setup {
-	
+
 	protected static final String FIRST_NAME = "First Name";
 	protected static final String LAST_NAME = "Last Name";
-	
+
 	@Mock
 	protected ModelMapper modelMapper;
-	
+
 	@Mock
 	protected CustomerRepository customerRepository;
-	
+
 	@Mock
 	protected CustomerOrderRepository customerOrderRepository;
-	
+
 	@Mock
 	protected OrderRepository orderRepository;
-	
+
 	protected CustomerService customerService;
-	
-    @BeforeEach
-    protected void init() {
-    	
-    	this.customerService = 
-    			new CustomerService(this.modelMapper, this.customerRepository, this.customerOrderRepository, this.orderRepository);
-    }
+
+	@BeforeEach
+	protected void init() {
+
+		this.customerService = new CustomerService(this.modelMapper, this.customerRepository,
+				this.customerOrderRepository, this.orderRepository);
+	}
 }

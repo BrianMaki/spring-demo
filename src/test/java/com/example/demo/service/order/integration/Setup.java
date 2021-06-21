@@ -12,13 +12,13 @@ import com.example.demo.service.OrderService;
 @ActiveProfiles("unit-test")
 @SpringBootTest(classes = SpringDemoApplication.class)
 class Setup {
-	
+
 	protected static final String ORDER_NUMBER_1 = RandomString.make();
 	protected static final String ORDER_NUMBER_2 = RandomString.make();
 
 	@Autowired
 	protected OrderRepository orderRepository;
-	
+
 	@Autowired
 	protected OrderService orderService;
 }

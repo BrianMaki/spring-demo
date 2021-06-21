@@ -19,28 +19,27 @@ import com.example.demo.service.OrderService;
 @AutoConfigureMockMvc
 @ActiveProfiles("unit-test")
 class Setup {
-	
+
 	protected static final String ORDER_NUMBER_1 = RandomString.make();
 	protected static final String ORDER_NUMBER_2 = RandomString.make();
 
 	@Autowired
 	protected OrderRepository orderRepository;
-	
+
 	@Autowired
 	protected OrderService orderService;
-	
+
 	@Autowired
 	protected WebApplicationContext context;
-	
-    protected MockMvc mockMvc;
-    
-    @BeforeEach
-    void setUp() throws Exception {
-    	
-    	mockMvc = MockMvcBuilders.webAppContextSetup(context)
-    			.alwaysDo(print())
-    		    //.apply(springSecurity())
-    			.build(); 
-        
-    }
+
+	protected MockMvc mockMvc;
+
+	@BeforeEach
+	void setUp() throws Exception {
+
+		mockMvc = MockMvcBuilders.webAppContextSetup(context)
+				.alwaysDo(print())
+				.build();
+
+	}
 }
