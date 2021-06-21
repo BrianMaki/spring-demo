@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
@@ -138,6 +139,14 @@ public class CustomerService {
 	}
 	
 	public void delete(UUID customerId) {
-		customerRepository.deleteById(customerId);
+		try {
+			customerRepository.deleteById(customerId);
+			
+		} catch (Exception e) {
+			if (ExceptionUtils.isCause(EmptyResultDataAccessException.class, e)) {
+				throw new EntityNotFoundException("Cannot find Customer to delete with customer id: " + customerId);
+			}
+			throw e;
+		}
 	}
 }
