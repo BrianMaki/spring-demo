@@ -19,7 +19,7 @@ class CreateOrderTests extends Setup {
 	@Test
 	@Transactional
 	@WithMockUser(roles = "spring-demo-api-admin")
-	void createCustomer_GivenValidRole_ReturnsCustomerResponse() throws Exception {
+	void createOrder_GivenValidRole_ReturnsCustomerResponse() throws Exception {
 		
 		// arrange
 		var request = CreateOrderRequest.builder()
@@ -40,7 +40,7 @@ class CreateOrderTests extends Setup {
 	@Test
 	@Transactional
 	@WithMockUser(roles = "spring-demo-api-client")
-	void createCustomer_GivenInvalidRole_ReturnsInternalServerError() throws Exception {
+	void createOrder_GivenInvalidRole_ReturnsInternalServerError() throws Exception {
 
 		// arrange
 		var request = CreateOrderRequest.builder()
