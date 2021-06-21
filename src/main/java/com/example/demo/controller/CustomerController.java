@@ -55,10 +55,9 @@ public class CustomerController {
 	@RolesAllowed("spring-demo-api-admin")
 	@ApiOperation(value = "Create Customer Order") 
 	@PostMapping(path = "/Order", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiResponses(value = {
+	@ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successfully created new Customer Order"),
-            @ApiResponse(code = 500, message = "Internal server error")
-    })
+            @ApiResponse(code = 500, message = "Internal server error")})
 	public ResponseEntity<CustomerOrderResponse> addOrder(
 			@Valid @RequestBody @NotNull CreateCustomerOrderRequest request) {
     	
@@ -75,11 +74,10 @@ public class CustomerController {
 	@RolesAllowed("spring-demo-api-admin")
 	@ApiOperation(value = "Create Customer") 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiResponses(value = {
+	@ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successfully created new Customer"),
             @ApiResponse(code = 400, message = "Update to create Customer, Unique Constraint Exception"),
-            @ApiResponse(code = 500, message = "Internal server error")
-    })
+            @ApiResponse(code = 500, message = "Internal server error")})
 	public ResponseEntity<CustomerResponse> create(
 			@Valid @RequestBody @NotNull CreateCustomerRequest request) {
     	
@@ -98,7 +96,7 @@ public class CustomerController {
 	@DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = "Successfully Deleted Customer"),
-			@ApiResponse(code = 500, message = "Internal server error") })
+			@ApiResponse(code = 500, message = "Internal server error")})
 	public ResponseEntity<HttpStatus> delete(@RequestParam @NotNull UUID customerId) {
 		
 		customerService.delete(customerId);
@@ -111,11 +109,10 @@ public class CustomerController {
 	@RolesAllowed("spring-demo-api-client")
     @GetMapping(path = "/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Read Customer", response = CustomerView.class)
-    @ApiResponses(value = {
+	@ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully found the customerwith the given Id"),
             @ApiResponse(code = 500, message = "Internal server error"),
-            @ApiResponse(code = 404, message = "Not found any customer with the given Id")
-    })
+            @ApiResponse(code = 404, message = "Not found any customer with the given Id")})
 	public ResponseEntity<CustomerView> get(@PathVariable UUID customerId) {
 		
 		
@@ -131,8 +128,7 @@ public class CustomerController {
     @ApiOperation(value = "Read Customer List", response = Object.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully found Customers"),
-            @ApiResponse(code = 500, message = "Internal server error")
-    })
+            @ApiResponse(code = 500, message = "Internal server error")})
     public ResponseEntity<List<CustomerResponse>> get() {
         return ResponseEntity
         		.status(HttpStatus.OK)
@@ -147,8 +143,7 @@ public class CustomerController {
             @ApiResponse(code = 400, message = "Update to update Customer, Unique Constraint Exception"),
             @ApiResponse(code = 400, message = "Unable to update Customer, Optimistic Lock Exception"),
             @ApiResponse(code = 404, message = "Not found any Customer to update with the given Customer Id"),
-            @ApiResponse(code = 500, message = "Internal server error")
-    })
+            @ApiResponse(code = 500, message = "Internal server error")})
     public ResponseEntity<CustomerResponse> update(
             @Valid @RequestBody UpdateCustomerRequest request) {
         Set<ConstraintViolation<UpdateCustomerRequest>> violations = request.readyForSubmissionViolations();

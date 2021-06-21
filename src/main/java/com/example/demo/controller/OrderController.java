@@ -50,11 +50,10 @@ public class OrderController {
 	
 	@ApiOperation(value = "Create Order") 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiResponses(value = {
+	@ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successfully created new Order"),
             @ApiResponse(code = 400, message = "Update to update Order, Unique Constraint Exception"),
-            @ApiResponse(code = 500, message = "Internal server error")
-    })
+            @ApiResponse(code = 500, message = "Internal server error")})
 	@RolesAllowed("spring-demo-api-admin")
 	public ResponseEntity<OrderResponse> create(
 			@Valid @RequestBody @NotNull CreateOrderRequest request) {
@@ -73,7 +72,7 @@ public class OrderController {
 	@DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = "Successfully Deleted Order"),
-			@ApiResponse(code = 500, message = "Internal server error") })
+			@ApiResponse(code = 500, message = "Internal server error")})
 	@RolesAllowed("spring-demo-api-admin")
 	public ResponseEntity<HttpStatus> delete(@RequestParam @NotNull UUID orderId) {
 		
@@ -89,8 +88,7 @@ public class OrderController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully found the order with the given Id"),
             @ApiResponse(code = 500, message = "Internal server error"),
-            @ApiResponse(code = 404, message = "Not found any order with the given Id")
-    })
+            @ApiResponse(code = 404, message = "Not found any order with the given Id")})
     @RolesAllowed("spring-demo-api-client")
 	public ResponseEntity<OrderView> get(@PathVariable UUID orderId) {
     	 return ResponseEntity
@@ -102,8 +100,7 @@ public class OrderController {
     @ApiOperation(value = "Read Order List", response = Object.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully found Orders"),
-            @ApiResponse(code = 500, message = "Internal server error")
-    })
+            @ApiResponse(code = 500, message = "Internal server error")})
     public ResponseEntity<List<OrderResponse>> get() {
 
         return ResponseEntity
@@ -118,8 +115,7 @@ public class OrderController {
             @ApiResponse(code = 400, message = "Update to update Order, Unique Constraint Exception"),
             @ApiResponse(code = 400, message = "Unable to update Order, Optimistic Lock Exception"),
             @ApiResponse(code = 404, message = "Not found any Order to update with the given Order Id"),
-            @ApiResponse(code = 500, message = "Internal server error")
-    })
+            @ApiResponse(code = 500, message = "Internal server error")})
     @RolesAllowed("spring-demo-api-admin")
     public ResponseEntity<OrderResponse> update(
             @Valid @RequestBody UpdateOrderRequest request) {

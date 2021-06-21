@@ -36,8 +36,8 @@ public class SwaggerConfig {
     
     @Value("${app.description: REST API description}")
     private String description;
-
-	@Value("${app.version: REST API version}")
+    
+    @Value("${app.version: REST API version}")
     private String version;
 
     @Value("${app.terms.service.url: REST API Terms of Service}")
