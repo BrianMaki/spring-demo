@@ -21,13 +21,13 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 public class SwaggerConfig {
-	
+
 	private static final String AUTHORIZATION_HEADER = "Authorization";
 	private static final String GLOBAL = "global";
 	private static final String ACCESS_EVERYTHING = "accessEverything";
 	private static final String HEADER = "header";
 	private static final String JWT = "JWT";
-	
+
     @Value("${app.title: REST API title}")
     private String title;
     
@@ -57,7 +57,6 @@ public class SwaggerConfig {
     
     @Value("${app.license.url: REST API license url}")
     private String licenseUrl;
-
 
     private ApiInfo apiInfo() {
       return new ApiInfo(
