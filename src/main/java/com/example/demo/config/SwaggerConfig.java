@@ -28,75 +28,77 @@ public class SwaggerConfig {
 	private static final String HEADER = "header";
 	private static final String JWT = "JWT";
 
-    @Value("${app.title: REST API title}")
-    private String title;
-    
-    @Value("${app.name: REST API name}")
-    private String name;
-    
-    @Value("${app.description: REST API description}")
-    private String description;
-    
-    @Value("${app.version: REST API version}")
-    private String version;
+	@Value("${app.title: REST API title}")
+	private String title;
 
-    @Value("${app.terms.service.url: REST API Terms of Service}")
-    private String termsOfServiceUrl;
-    
-    @Value("${app.contact.name: REST API contact name}")
-    private String contactName;
-    
-    @Value("${app.contact.url: REST API contact url}")
-    private String contactUrl;
-    
-    @Value("${app.contact.email: REST API contact email}")
-    private String contactEmail;
-    
-    @Value("${app.license.name: REST API license}")
-    private String licenseName;
-    
-    @Value("${app.license.url: REST API license url}")
-    private String licenseUrl;
+	@Value("${app.name: REST API name}")
+	private String name;
 
-    private ApiInfo apiInfo() {
-      return new ApiInfo(
-    		  title,
-    		  description,
-    		  version,
-    		  termsOfServiceUrl,
-    		  new Contact(contactName, contactUrl, contactEmail),
-    		  licenseName,
-    		  licenseUrl,
-    		  Collections.emptyList());
-    }
+	@Value("${app.description: REST API description}")
+	private String description;
 
-    @Bean
-    public Docket api() {
-      return new Docket(DocumentationType.SWAGGER_2)
-          .apiInfo(apiInfo())
-          .securityContexts(Arrays.asList(securityContext()))
-          .securitySchemes(Arrays.asList(apiKey()))
-          .select()
-          .apis(RequestHandlerSelectors.any())
-          .paths(PathSelectors.any())
-          .build();
-    }
+	@Value("${app.version: REST API version}")
+	private String version;
 
-    private ApiKey apiKey() {
-      return new ApiKey(JWT, AUTHORIZATION_HEADER, HEADER);
-    }
+	@Value("${app.terms.service.url: REST API Terms of Service}")
+	private String termsOfServiceUrl;
 
-    private SecurityContext securityContext() {
-      return SecurityContext.builder()
-          .securityReferences(defaultAuth())
-          .build();
-    }
+	@Value("${app.contact.name: REST API contact name}")
+	private String contactName;
 
-    List<SecurityReference> defaultAuth() {
-      var authorizationScope
-          = new AuthorizationScope(GLOBAL, ACCESS_EVERYTHING);
-      AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-      authorizationScopes[0] = authorizationScope;
-      return Arrays.asList(new SecurityReference(JWT, authorizationScopes));
-    }
+	@Value("${app.contact.url: REST API contact url}")
+	private String contactUrl;
+
+	@Value("${app.contact.email: REST API contact email}")
+	private String contactEmail;
+
+	@Value("${app.license.name: REST API license}")
+	private String licenseName;
+
+	@Value("${app.license.url: REST API license url}")
+	private String licenseUrl;
+
+	private ApiInfo apiInfo() {
+		return new ApiInfo(
+				title, 
+				description, 
+				version, 
+				termsOfServiceUrl,
+				new Contact(
+						contactName, 
+						contactUrl, 
+						contactEmail), 
+				licenseName, 
+				licenseUrl, 
+				Collections.emptyList());
+	}
+
+	@Bean
+	public Docket api() {
+		return new Docket(DocumentationType.SWAGGER_2)
+				.apiInfo(apiInfo())
+				.securityContexts(Arrays.asList(securityContext()))
+				.securitySchemes(Arrays.asList(apiKey()))
+				.select()
+				.apis(RequestHandlerSelectors.any())
+				.paths(PathSelectors.any())
+				.build();
+	}
+
+	private ApiKey apiKey() {
+		return new ApiKey(JWT, AUTHORIZATION_HEADER, HEADER);
+	}
+
+	private SecurityContext securityContext() {
+		return SecurityContext.builder()
+				.securityReferences(defaultAuth())
+				.build();
+	}
+
+	List<SecurityReference> defaultAuth() {
+		var authorizationScope = new AuthorizationScope(GLOBAL, ACCESS_EVERYTHING);
+		AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+		authorizationScopes[0] = authorizationScope;
+		return Arrays.asList(new SecurityReference(JWT, authorizationScopes));
+	}
 }
