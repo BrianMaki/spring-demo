@@ -1,5 +1,7 @@
 package com.example.demo.controller.customer.mock;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -29,6 +31,7 @@ class Setup {
 	void setUp() throws Exception {
 		this.mockMvc = MockMvcBuilders
 				.standaloneSetup(new CustomerController(customerService))
+				.alwaysDo(print())
 				.build();
 	}
 }

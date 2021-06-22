@@ -53,6 +53,7 @@ Keycloack:
 
 Run Spring Boot Application
 
+- If running Docker is running, make sure to disable spring-demo-demo-api, if you wish to run code from Eclipse or Intellij.
 - Create Environment Variable 'SPRING_PROFILES_ACTIVE'.  Value 'dev' will point to application-dev.yaml file. 
   Do not use 'unit-test'. This profile is used solely for unit tests and should not be used on start up.  If you enter a
   value that does not correspond to en existing yaml file, then application.yaml will be used.  For example, 'prod'

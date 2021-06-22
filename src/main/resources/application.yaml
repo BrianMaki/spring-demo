@@ -39,7 +39,7 @@ keycloak:
   realm: ${KEYCLOAK_REALM:spring-demo}
   resource: ${KEYCLOAK_RESOURCE:spring-demo-api}
   credentials:
-    secret: ${KEYCLOAK_CREDENTIALS_SECRET:8e66d4c6-e855-4261-ae63-b7fed91370f2}
+    secret: ${KEYCLOAK_CREDENTIALS_SECRET:20f799fb-5026-4096-aed1-f6aace5385b8}
   use-resource-role-mappings: true
   bearer-only: true
   ssl-required: ${KEYCLOAK_SSL_REQUIRED:external}

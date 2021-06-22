@@ -43,4 +43,21 @@ services:
   # ###                                        KEYCLOAK Config                                ###
   # #############################################################################################
   keycloak-config:
-    command: sh -c "dockerize -wait http://keycloak:8080 -timeout 300s /tmp/createuser.sh"     
+    command: sh -c "dockerize -wait http://keycloak:8080 -timeout 300s /tmp/createuser.sh"
+
+  # #############################################################################################
+  # ###                                         Spring Demo
+  # #############################################################################################  
+  demo-api:
+    image: demo-api
+    build: .
+    ports:
+      - 9002:9002
+    environment:
+      DB_HOST: postgres:5432/demo
+      KEYCLOAK_AUTH_SERVER_URL: http://keycloak:8080/auth
+      KEYCLOAK_REALM: spring-demo
+      KEYCLOAK_RESOURCE: spring-demo-api
+      KEYCLOAK_CREDENTIALS_SECRET: 20f799fb-5026-4096-aed1-f6aace5385b8
+      KEYCLOAK_SSL_REQUIRED: external
+ 
