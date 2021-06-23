@@ -54,6 +54,7 @@ services:
     ports:
       - 9002:9002
     environment:
+      SPRING_PROFILES_ACTIVE: dev
       DB_HOST: postgres:5432/demo
       KEYCLOAK_AUTH_SERVER_URL: http://keycloak:8080/auth
       KEYCLOAK_REALM: spring-demo
